@@ -6,12 +6,13 @@ import { Telegraf, Context } from 'telegraf';
 import { getRsi } from './rsi';
 
 const bot: Telegraf<Context<Update>> = new Telegraf(process.env.BOT_TOKEN as string);
+let cronJob: cron.ScheduledTask;
 
 bot.start(ctx => {
     ctx.reply('Welcome!')
 
     // cron job to run every minute
-    cron.schedule('* * * * *', async () => {
+    cronJob = cron.schedule('* * * * *', async () => {
         try {
             const rsi = await getRsi()
             ctx.reply(String(rsi))
@@ -24,6 +25,7 @@ bot.start(ctx => {
 
 bot.hears('stop', ctx => { 
     ctx.reply('Bot stopped.')
+    cronJob.stop();
     bot.stop()}
 )
 

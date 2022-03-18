@@ -4,6 +4,9 @@ import { Update } from 'typegram';
 import cron from 'node-cron';
 import { Telegraf, Context } from 'telegraf';
 import { getRsi } from './rsi';
+import { getOrderType } from './utils';
+import { getBalances, tradeRequest } from './APIClient';
+import { getTradeData } from './trade';
 
 const bot: Telegraf<Context<Update>> = new Telegraf(process.env.BOT_TOKEN as string);
 let cronJob: cron.ScheduledTask;
@@ -14,8 +17,27 @@ bot.start(ctx => {
     // cron job to run every minute
     cronJob = cron.schedule('* * * * *', async () => {
         try {
-            const rsi = await getRsi()
-            ctx.reply(String(rsi))
+            const data = await getRsi()
+            if (data) {
+                const fundBalance =  await getBalances()
+                const orderType = getOrderType(data.rsi)
+                if (orderType && fundBalance) {
+                    const tradeData = getTradeData(fundBalance, orderType, data.currentPrice)
+                    tradeData && ctx.reply(String(data.rsi))
+                    if (tradeData) {
+                        const tradeResponse = await tradeRequest(tradeData.orderType, tradeData.quantity, tradeData.price)
+                        if(tradeResponse) {
+                            ctx.reply(JSON.stringify(tradeResponse))
+                        }
+                        if(!tradeResponse) {
+                            ctx.reply('Trade Failed')
+                        }
+                    }
+                }
+
+                
+            }
+            
         }
         catch (err) {
             console.log({rsi: err})  

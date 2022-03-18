@@ -7,6 +7,10 @@
     "build": "tsc",
     "start": "node dist/app.js"
   },
+  "engines": {
+    "node": "12.16.2",
+    "npm": "8.1"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {

@@ -26,6 +26,7 @@ export const getTradingData = async () => {
 export const getBalances = async (): Promise<
   RequiredBalanceDetails | undefined
 > => {
+    console.log(".......getBalances.........");
   try {
     const timeStamp = Math.floor(Date.now());
     const body = {
@@ -61,6 +62,7 @@ export const tradeRequest = async (
   quantity: number,
   currentPrice: number
 ) => {
+    console.log(".......tradeRequest.........");
   try {
     const body = generateTradeRequest(orderType, quantity, currentPrice);
 

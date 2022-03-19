@@ -10,7 +10,7 @@ export const generateTradeRequest = (
     side: orderType,
     order_type: "limit_order",
     market: "USDCINR",
-    price_per_unit: currentPrice,
+    price_per_unit: currentPrice.toString(),
     total_quantity: quantity,
     timestamp: timeStamp,
     client_order_id: `${timeStamp}-${orderType}_${quantity}`,
@@ -27,7 +27,7 @@ export const getTradeData = (
 
     return {
       orderType,
-      quantity: quantityToBuy,
+      quantity: quantityToBuy.toFixed(2),
       price: currentPrice,
     };
   } else if (

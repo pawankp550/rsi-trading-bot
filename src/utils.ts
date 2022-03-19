@@ -6,9 +6,9 @@ import {
 } from "./types";
 
 export const getOrderType = (rsi: number): OrderType | undefined => {
-  if (rsi < 35) {
+  if (rsi < 36) {
     return OrderType.Buy;
-  } else if (rsi > 60) {
+  } else if (rsi > 59) {
     return OrderType.Sell;
   }
 };

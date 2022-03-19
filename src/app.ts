@@ -25,7 +25,7 @@ bot.start(ctx => {
                     const tradeData = getTradeData(fundBalance, orderType, data.currentPrice)
                     tradeData && ctx.reply(String(data.rsi))
                     if (tradeData) {
-                        const tradeResponse = await tradeRequest(tradeData.orderType, tradeData.quantity, tradeData.price)
+                        const tradeResponse = await tradeRequest(tradeData.orderType, Number(tradeData.quantity), tradeData.price)
                         if(tradeResponse) {
                             ctx.reply(JSON.stringify(tradeResponse))
                         }

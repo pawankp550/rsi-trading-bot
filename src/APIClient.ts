@@ -85,7 +85,8 @@ export const tradeRequest = async (
       config
     );
     return res.data;
-  } catch (err) {
+  } catch (err: any) {
     console.log({ tradeRequest: err });
+    console.log({ message: err.message });
   }
 };

@@ -23,7 +23,7 @@ export const getTradeData = (
   currentPrice: number
 ) => {
   if (orderType === OrderType.Buy && Number(fundBalance.INR.balance) > 100) {
-    const quantityToBuy = Number(fundBalance.INR.balance) / currentPrice;
+    const quantityToBuy = (Number(fundBalance.INR.balance) / currentPrice) - 0.5;
 
     return {
       orderType,

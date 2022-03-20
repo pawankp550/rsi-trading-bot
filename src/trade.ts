@@ -1,4 +1,4 @@
-import { OrderType, RequiredBalanceDetails } from "./types";
+import { OrderType, RequiredBalanceDetails, TOKEN } from "./types";
 
 export const generateTradeRequest = (
   orderType: OrderType,
@@ -9,7 +9,7 @@ export const generateTradeRequest = (
   return {
     side: orderType,
     order_type: "limit_order",
-    market: "USDCINR",
+    market: `${TOKEN}INR`,
     price_per_unit: currentPrice.toString(),
     total_quantity: quantity,
     timestamp: timeStamp,
@@ -23,7 +23,7 @@ export const getTradeData = (
   currentPrice: number
 ) => {
   if (orderType === OrderType.Buy && Number(fundBalance.INR.balance) > 100) {
-    const quantityToBuy = (Number(fundBalance.INR.balance) / currentPrice) - 0.5;
+    const quantityToBuy = Number(fundBalance.INR.balance) / currentPrice - 0.5;
 
     return {
       orderType,
@@ -32,9 +32,9 @@ export const getTradeData = (
     };
   } else if (
     orderType === OrderType.Sell &&
-    Number(fundBalance.USDC.balance) > 0
+    Number(fundBalance[TOKEN].balance) > 0
   ) {
-    const quantityToSell = Number(fundBalance.USDC.balance);
+    const quantityToSell = Number(fundBalance[TOKEN].balance);
 
     return {
       orderType,

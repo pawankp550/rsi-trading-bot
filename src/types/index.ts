@@ -1,3 +1,6 @@
+export const TOKEN = 'USDT'
+export const INR = 'INR'
+
 export interface CandlesResponse {
   readonly open: number;
   readonly high: number;
@@ -19,13 +22,8 @@ export enum OrderType {
 }
 
 export interface RequiredBalanceDetails {
-  readonly USDC: BalanceResponse;
+  readonly [TOKEN]: BalanceResponse;
   readonly INR: BalanceResponse;
-}
-
-export enum RequiredTokens {
-  USDC = "USDC",
-  INR = "INR",
 }
 
 export interface TradeResponseData {

@@ -11,7 +11,7 @@ export const getRsi = async () => {
         if(data) {
         const currentPrice = data[0].close
         const rsi = RSI.calculate({
-            values: data.reverse().map((d: any) => d.close),
+            values: data.reverse().map((d) => d.close),
             period: TIME_PERIOD
         })
         return {rsi: rsi[rsi.length - 1], currentPrice}

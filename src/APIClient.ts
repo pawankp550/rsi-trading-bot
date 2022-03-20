@@ -6,6 +6,7 @@ import {
   CandlesResponse,
   OrderType,
   RequiredBalanceDetails,
+  TOKEN,
   TradeResponse,
 } from "./types";
 import { filterBalanceResponse } from "./utils";
@@ -15,7 +16,7 @@ const baseURL = "https://api.coindcx.com";
 export const getTradingData = async () => {
   try {
     const res: AxiosResponse<CandlesResponse[], void> = await axios.get(
-      "https://public.coindcx.com/market_data/candles?pair=I-USDC_INR&interval=1d&limit=500"
+      `https://public.coindcx.com/market_data/candles?pair=I-${TOKEN}_INR&interval=1d&limit=500`
     );
     return res.data;
   } catch (err) {
@@ -26,7 +27,7 @@ export const getTradingData = async () => {
 export const getBalances = async (): Promise<
   RequiredBalanceDetails | undefined
 > => {
-    console.log(".......getBalances.........");
+  console.log(".......getBalances.........");
   try {
     const timeStamp = Math.floor(Date.now());
     const body = {
@@ -62,7 +63,7 @@ export const tradeRequest = async (
   quantity: number,
   currentPrice: number
 ) => {
-    console.log(".......tradeRequest.........");
+  console.log(".......tradeRequest.........");
   try {
     const body = generateTradeRequest(orderType, quantity, currentPrice);
 

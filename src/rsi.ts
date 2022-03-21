@@ -16,7 +16,7 @@ export const getRsi = async () => {
         })
         return {rsi: rsi[rsi.length - 1], currentPrice}
      } else {
-        return {rsi: Infinity, currentPrice: Infinity}
+        return {rsi: undefined, currentPrice: undefined}
      }
     }
     catch (err) {

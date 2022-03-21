@@ -18,7 +18,7 @@ bot.start(ctx => {
     cronJob = cron.schedule('* * * * *', async () => {
         try {
             const data = await getRsi()
-            if (data) {
+            if (data && data.rsi && data.currentPrice) {
                 const fundBalance =  await getBalances()
                 const orderType = getOrderType(data.rsi)
                 if (orderType && fundBalance) {

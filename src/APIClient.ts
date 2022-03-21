@@ -16,7 +16,7 @@ const baseURL = "https://api.coindcx.com";
 export const getTradingData = async () => {
   try {
     const res: AxiosResponse<CandlesResponse[], void> = await axios.get(
-      `https://public.coindcx.com/market_data/candles?pair=I-${TOKEN}_INR&interval=1d&limit=500`
+      `https://public.coindcx.com/market_data/candles?pair=I-${TOKEN}_INR&interval=30m&limit=200`
     );
     return res.data;
   } catch (err) {

@@ -48,7 +48,7 @@ bot.start(ctx => {
 bot.hears('stop', ctx => { 
     ctx.reply('Bot stopped.')
     cronJob.stop();
-    bot.stop()}
+    bot.stop('SIGINT')}
 )
 
 bot.launch()

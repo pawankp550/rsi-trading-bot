@@ -1,9 +1,9 @@
 import {
   BalanceResponse,
-  INR,
   OrderType,
   RequiredBalanceDetails,
   TOKEN,
+  TOKEN2,
 } from "./types";
 
 export const getOrderType = (rsi: number): OrderType | undefined => {
@@ -19,6 +19,6 @@ export const filterBalanceResponse = (
 ): RequiredBalanceDetails => {
   return {
     [TOKEN]: balances.find((b) => b.currency === TOKEN)!,
-    INR: balances.find((b) => b.currency === INR)!,
+    [TOKEN2]: balances.find((b) => b.currency === TOKEN2)!,
   };
 };

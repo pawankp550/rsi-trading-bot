@@ -1,6 +1,6 @@
-export const TOKEN = 'USDT'
-export const INR = 'INR'
-
+export const TOKEN = 'MATIC'
+export const TOKEN2 = 'USDT'
+export const MINIMUM_BALANCE = 2
 export interface CandlesResponse {
   readonly open: number;
   readonly high: number;
@@ -23,7 +23,7 @@ export enum OrderType {
 
 export interface RequiredBalanceDetails {
   readonly [TOKEN]: BalanceResponse;
-  readonly INR: BalanceResponse;
+  readonly [TOKEN2]: BalanceResponse;
 }
 
 export interface TradeResponseData {

@@ -7,16 +7,18 @@ import {
   OrderType,
   RequiredBalanceDetails,
   TOKEN,
+  TOKEN2,
   TradeResponse,
 } from "./types";
 import { filterBalanceResponse } from "./utils";
 
 const baseURL = "https://api.coindcx.com";
+const pair = `B-${TOKEN}_${TOKEN2}`;
 
 export const getTradingData = async () => {
   try {
     const res: AxiosResponse<CandlesResponse[], void> = await axios.get(
-      `https://public.coindcx.com/market_data/candles?pair=I-${TOKEN}_INR&interval=1h&limit=200`
+      `https://public.coindcx.com/market_data/candles?pair=${pair}&interval=1h&limit=200`
     );
     return res.data;
   } catch (err) {
@@ -53,8 +55,9 @@ export const getBalances = async (): Promise<
       config
     );
     return filterBalanceResponse(res.data);
-  } catch (err) {
+  } catch (err: any) {
     console.log({ getBalances: err });
+    console.log({ message: err.message });
   }
 };
 

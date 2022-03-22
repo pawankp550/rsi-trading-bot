@@ -23,11 +23,12 @@ export const getTradeData = (
   currentPrice: number
 ) => {
   if (orderType === OrderType.Buy && Number(fundBalance[TOKEN2].balance) > MINIMUM_BALANCE) {
-    const quantityToBuy = Number(fundBalance[TOKEN2].balance) / currentPrice - 0.5;
+    // substract 0.5% from fund balance
+    const quantityToBuy = (Number(fundBalance[TOKEN2].balance) * 0.95 ) / currentPrice;
 
     return {
       orderType,
-      quantity: quantityToBuy.toFixed(2),
+      quantity: quantityToBuy.toFixed(1),
       price: currentPrice,
     };
   } else if (

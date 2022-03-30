@@ -12,7 +12,8 @@ const bot: Telegraf<Context<Update>> = new Telegraf(process.env.BOT_TOKEN as str
 let cronJob: cron.ScheduledTask;
 
 bot.start(ctx => {
-    ctx.reply('Welcome!')
+    ctx.reply('Starting bot...');
+    console.log('Starting bot...');
 
     // cron job to run every minute
     cronJob = cron.schedule('* * * * *', async () => {
@@ -48,6 +49,7 @@ bot.start(ctx => {
 bot.hears('stop', ctx => { 
     try {
         // stop cron job
+        console.log('Stopping cron job...');
         cronJob.stop()
         ctx.reply('Stopped')
     }

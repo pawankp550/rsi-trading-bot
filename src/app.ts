@@ -46,9 +46,15 @@ bot.start(ctx => {
 })
 
 bot.hears('stop', ctx => { 
-    ctx.reply('Bot stopped.')
-    cronJob.stop();
-    bot.stop('SIGINT')}
+    try {
+        // stop cron job
+        cronJob.stop()
+        ctx.reply('Stopped')
+    }
+    catch (err) {
+        console.log({stop: err})
+    }
+}
 )
 
 bot.launch()

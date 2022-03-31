@@ -20,6 +20,9 @@ bot.start(ctx => {
         try {
             const data = await getRsi()
             if (data && data.rsi && data.currentPrice) {
+                if(data.rsi <= 40) {
+                    ctx.reply(`RSI: ${data.rsi}`);
+                }
                 const fundBalance =  await getBalances()
                 const orderType = getOrderType(data.rsi)
                 if (orderType && fundBalance) {
